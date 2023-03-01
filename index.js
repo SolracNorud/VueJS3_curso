@@ -49,3 +49,9 @@ const saludo = nombre => 'Hola soy '+ nombre
 const saludos = (nombre = 'desconocido') => 'Hola soy '+ nombre
 //console.log(saludos())
 
+/**
+ * Template String
+ */
+
+const mensaje = send => `El mensaje es: ${send}`
+console.log(mensaje('Hoola'))
