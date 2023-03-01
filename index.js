@@ -54,4 +54,36 @@ const saludos = (nombre = 'desconocido') => 'Hola soy '+ nombre
  */
 
 const mensaje = send => `El mensaje es: ${send}`
-console.log(mensaje('Hoola'))
+//console.log(mensaje('Hoola'))
+
+/**
+ * Objetos
+ */
+
+const mascota = {
+    nombre: 'Churrumais',
+    edad: 5,
+    vivo: true,
+    caracteristicas: ['Gordito', '6 Kilos', 'Naranja']
+}
+
+const {edad} = mascota
+//console.log(edad)
+//console.log(mascota.caracteristicas)
+
+const web = {
+    nombre: 'oxxo',
+    links: {
+        enlace: 'www.oxxo.com.mx'
+    },
+    redesSociales:{
+        youtube: {
+            enlace: 'youtube.com/oxxo',
+            nombre: 'OXXOYT'
+        }
+    }
+}
+
+const {nombre} = web.redesSociales.youtube
+//console.log(nombre)
+
