@@ -1,15 +1,19 @@
 <script setup>
+import {ref} from 'vue'
+
 const saludo = 'desconocido!'
 
+const counter = ref(0)
+
 //metodo - methods
-const handleClick = message => console.log(message)
+const increment = () => counter.value++
+
 </script>
 
 <template>
-  <h1> ¡Hola {{ saludo }}</h1>
-  <button v-on:click="handleClick('¡Me activaste 1!')">Activame 1</button>
-  <br>
-  <button @:click="handleClick('¡Me activaste 2!')">Activame 2</button>
+  <h1> ¡Variables reactivas!</h1>
+  <h2>{{ counter }}</h2>
+  <button @click="increment()">Incrementar</button>
 </template>
 
 <style>
