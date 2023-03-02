@@ -28,7 +28,7 @@ const bloquearBtnAdd = computed(() => {
 
 <template>
   <div class="container text-center mt-3">
-    <h1> ¡Bootstrap! </h1>
+    <h1> ¡Deploy! </h1>
     <h2 :class="classCounter">{{ counter }}</h2>
     <div class="btn-group">
       <button @click="increment()" class="btn btn-success">Incrementar</button>
