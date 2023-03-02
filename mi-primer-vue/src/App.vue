@@ -27,16 +27,19 @@ const bloquearBtnAdd = computed(() => {
 </script>
 
 <template>
-  <h1> ¡Práctica 2! </h1>
-  <h2 :class="classCounter">{{ counter }}</h2>
-  <button @click="increment()">Incrementar</button>
-  <button @click="decrement()">Decrementar</button>
-  <button @click="reset()">Restablecer</button>
-  <button @click="add(counter)" :disabled="bloquearBtnAdd">Favorito</button>
-  <ul>
-    <li v-for="(num, index) in arrayFav" :key="index"> {{ num }}</li>
-  </ul>
-
+  <div class="container text-center mt-3">
+    <h1> ¡Bootstrap! </h1>
+    <h2 :class="classCounter">{{ counter }}</h2>
+    <div class="btn-group">
+      <button @click="increment()" class="btn btn-success">Incrementar</button>
+      <button @click="decrement()" class="btn btn-danger">Decrementar</button>
+      <button @click="reset()" class="btn btn-secondary">Restablecer</button>
+      <button @click="add(counter)" :disabled="bloquearBtnAdd" class="btn btn-primary">Favorito</button>
+    </div>
+    <ul class="list-group mt-4">
+      <li class="list-group-item" v-for="(num, index) in arrayFav" :key="index"> {{ num }}</li>
+    </ul>
+  </div>
 </template>
 
 <style>
@@ -54,4 +57,5 @@ h1 {
 
 .zero {
   color: white;
-}</style>
+}
+</style>
