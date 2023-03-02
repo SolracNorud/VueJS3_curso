@@ -1,47 +1,28 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+const name = 'Vue Dinamico'
+const styleColor = "color: white"
+const arrayColores = ["green", "white", "orange"]
+const active = null
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <h1> Hola {{ name.toUpperCase() }}</h1>
+  <br>
+  <h2> {{ arrayColores }}</h2>
+  <br>
+  <h2 :style="`color:${arrayColores[2]}`"> Soy Naranja </h2>
+  <br>
+  <h2>
+    {{ active ? 'Estoy activo' : 'Estoy inactivo' }}
+  </h2>
+  <br>
+  <p v-if= "active === true">Estoy activo</p>
+  <p v-else-if ="active === false">Estoy inactivo</p>
+  <p v-else>Esto indeciso</p>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+<style>
+h1{
+  color:aqua;
 }
 </style>
