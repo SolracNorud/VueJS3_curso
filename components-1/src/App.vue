@@ -1,47 +1,98 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { ref, computed, onMounted } from "vue";
+import BlogPost from "./components/BlogPost.vue";
+import PaginatePost from "./components/PaginatePost.vue";
+import LoadingSpinner from "./components/LoadingSpinner.vue";
+
+const posts = ref([]);
+const postXpage = 10;
+const inicio = ref(0);
+const fin = ref(postXpage);
+const favorito = ref("");
+const loading = ref(true);
+
+const cambiarFavorito = (title) => {
+  favorito.value = title;
+};
+
+const next = () => {
+  inicio.value += +postXpage;
+  fin.value += +postXpage;
+};
+
+const previous = () => {
+  inicio.value += -postXpage;
+  fin.value += -postXpage;
+};
+
+// onMounted(async () => {
+//   try {
+//     const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+//     posts.value = await res.json();
+//   } catch (error) {
+//     console.log(error);
+//   } finally {
+//     setTimeout(() => {
+//       loading.value = false;
+//     }, 2000);
+//   }
+// });
+
+// fetch("https://jsonplaceholder.typicode.com/posts")
+//   .then((res) => res.json())
+//   .then((data) => {
+//     posts.value = data;
+//   })
+//   .finally(() => {
+//     setTimeout(()=>{
+//         loading.value = false
+//     }, 2000)
+//   });
+
+
+const fetchData = (async () => {
+  try {
+    const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+    posts.value = await res.json();
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setTimeout(() => {
+      loading.value = false;
+    }, 2000);
+  }
+});
+fetchData();
+const maxLength = computed(() => posts.value.length);
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <LoadingSpinner v-if="loading" />
+  <div class="container" v-else>
+    <h1>APP</h1>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
+    <h2>Mis Post Favorito: {{ favorito }}</h2>
 
-  <main>
-    <TheWelcome />
-  </main>
+    <PaginatePost
+      :inicio="inicio"
+      :fin="fin"
+      class="mb-2"
+      @next="next()"
+      @previous="previous()"
+      :maxLength="maxLength"
+    />
+
+    <BlogPost
+      v-for="post in posts.slice(inicio, fin)"
+      :key="post.id"
+      :title="post.title"
+      :id="post.id"
+      :body="post.body"
+      @cambiarFavoritoNombre="cambiarFavorito"
+      class="mb-2"
+    >
+    </BlogPost>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
+<style></style>
